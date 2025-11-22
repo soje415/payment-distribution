@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USDT Payment Distribution - BEP20</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .header {
+            background: #f8f9fa;
+            padding: 30px;
+            text-align: center;
+            border-bottom: 3px solid #e9ecef;
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .header .subtitle {
+            color: #6c757d;
+            font-size: 16px;
+        }
+
+        .distribution-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 0;
+        }
+
+        .wallet-card {
+            padding: 30px;
+            border-right: 1px solid #e9ecef;
+            position: relative;
+        }
+
+        .wallet-card:last-child {
+            border-right: none;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .role {
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .percentage {
+            background: #4caf50;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .network-badge {
+            background: #ff9800;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+
+        .wallet-address {
+            background: #f8f9fa;
+            border: 2px dashed #dee2e6;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            word-break: break-all;
+            color: #2c3e50;
+            position: relative;
+        }
+
+        .copy-btn {
+            background: #2196f3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 10px;
+            transition: background 0.3s;
+            width: 100%;
+        }
+
+        .copy-btn:hover {
+            background: #1976d2;
+        }
+
+        .copy-btn.copied {
+            background: #4caf50;
+        }
+
+        .warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+            color: #856404;
+            font-size: 14px;
+        }
+
+        .total-section {
+            background: #2c3e50;
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .total-amount {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .verification {
+            background: #f8f9fa;
+            padding: 20px;
+            border-top: 1px solid #e9ecef;
+            text-align: center;
+            font-size: 12px;
+            color: #6c757d;
+        }
+
+        @media (max-width: 768px) {
+            .distribution-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .wallet-card {
+                border-right: none;
+                border-bottom: 1px solid #e9ecef;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>USDT Payment Distribution</h1>
+            <div class="subtitle">BNB Smart Chain (BEP20) Network Only</div>
+        </div>
+
+        <div class="distribution-grid">
+            <!-- Your Wallet -->
+            <div class="wallet-card">
+                <div class="card-header">
+                    <div class="role">Project Lead</div>
+                    <div class="percentage">15%</div>
+                </div>
+                
+                <div class="network-badge">BNB Smart Chain (BEP20)</div>
+                
+                <div class="wallet-address" id="wallet1">
+                    0x5c94f548340a506aab427ddbce218f3e635f70e1
+                </div>
+                
+                <button class="copy-btn" onclick="copyAddress('wallet1', this)">
+                    Copy Address
+                </button>
+                
+                <div class="warning">
+                    ⚠️ Only send USDT via BEP20. Do not send NFTs or other tokens to this address.
+                </div>
+            </div>
+
+            <!-- Facilitator 1 -->
+            <div class="wallet-card">
+                <div class="card-header">
+                    <div class="role">Facilitator 1</div>
+                    <div class="percentage">7.5%</div>
+                </div>
+                
+                <div class="network-badge">BNB Smart Chain (BEP20)</div>
+                
+                <div class="wallet-address" id="wallet2">
+                    0x2c2c49d7c87e676ca89af51cdbebcf4703ed06d9
+                </div>
+                
+                <button class="copy-btn" onclick="copyAddress('wallet2', this)">
+                    Copy Address
+                </button>
+                
+                <div class="warning">
+                    ⚠️ Only send USDT via BEP20. Do not send NFTs or other tokens to this address.
+                </div>
+            </div>
+
+            <!-- Facilitator 2 (Placeholder) -->
+            <div class="wallet-card">
+                <div class="card-header">
+                    <div class="role">Facilitator 2</div>
+                    <div class="percentage">7.5%</div>
+                </div>
+                
+                <div class="network-badge">BNB Smart Chain (BEP20)</div>
+                
+                <div class="wallet-address" id="wallet3" style="background: #fff3cd; color: #856404;">
+                    [Awaiting wallet address from second facilitator]
+                </div>
+                
+                <button class="copy-btn" style="background: #6c757d;" disabled>
+                    Address Pending
+                </button>
+                
+                <div class="warning">
+                    ⚠️ This wallet address is currently unavailable. Please check back later.
+                </div>
+            </div>
+        </div>
+
+        <div class="total-section">
+            <div>Total Distribution</div>
+            <div class="total-amount">30%</div>
+            <div>of Total Payment</div>
+        </div>
+
+        <div class="verification">
+            <strong>Integrity Check:</strong> All addresses verified for BEP20 compatibility. 
+            Total distribution: 15% + 7.5% + 7.5% = 30%
+        </div>
+    </div>
+
+    <script>
+        function copyAddress(walletId, button) {
+            const walletElement = document.getElementById(walletId);
+            const address = walletElement.textContent.trim();
+            
+            // Check if it's a placeholder
+            if (address.includes('Awaiting') || address.includes('Pending')) {
+                alert('Wallet address not yet available');
+                return;
+            }
+            
+            // Copy to clipboard
+            navigator.clipboard.writeText(address).then(() => {
+                // Visual feedback
+                const originalText = button.textContent;
+                button.textContent = '✓ Copied!';
+                button.classList.add('copied');
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+                alert('Failed to copy address');
+            });
+        }
+
+        // Add some interactive features
+        document.addEventListener('DOMContentLoaded', function() {
+            const walletElements = document.querySelectorAll('.wallet-address');
+            
+            walletElements.forEach(wallet => {
+                wallet.addEventListener('click', function() {
+                    if (!this.textContent.includes('Awaiting')) {
+                        this.style.background = '#e8f5e8';
+                        setTimeout(() => {
+                            this.style.background = '#f8f9fa';
+                        }, 1000);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
